@@ -4,6 +4,7 @@ if (process.env.NODE_ENV === undefined || process.env.NODE_ENV !== 'production')
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
+const axios = require('axios');
 
 const app = express();
 
@@ -12,6 +13,26 @@ app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:htt
 
 // Serve static assets
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
+
+app.get('/champions', (req, res) => {
+  const apiUrl = 'https://global.api.riotgames.com/api/lol/static-data/NA/v1.2/champion?api_key=' + process.env.LOL_API_KEY;
+
+  axios.get(apiUrl, {
+      params: {
+        champData: 'all'
+      }
+    })
+    .then((response) => {
+      res.setHeader('Content-Type', 'application/json');
+      res.send((response.data.data));
+    })
+    .catch(function (error) {
+      res.send({
+        status: 400,
+        error: "Unexpected error occurred."
+      })
+    });
+});
 
 // Always return the main index.html, so react-router render the route in the client
 app.get('*', (req, res) => {
