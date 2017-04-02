@@ -6,7 +6,12 @@ Application to learn more about the League of Legends champions.
 
 To explore the following technologies:
 
+* Server side rendering of ReactJS applications
+* Express
 * Redux
-* Reactjs
 * RxJS
 * Jest
+
+## TODO
+
+* Secure api access using JWT tokens
