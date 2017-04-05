@@ -8,6 +8,8 @@ const axios = require('axios');
 
 const app = express();
 
+const API_URL = 'https://global.api.riotgames.com/api/lol/static-data/NA/v1.2';
+
 // Setup logger
 app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'));
 
@@ -15,7 +17,7 @@ app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:htt
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
 
 app.get('/champions', (req, res) => {
-  const apiUrl = 'https://global.api.riotgames.com/api/lol/static-data/NA/v1.2/champion?api_key=' + process.env.LOL_API_KEY;
+  const apiUrl = API_URL + '/champion?champData=all&api_key=' + process.env.LOL_API_KEY;
 
   axios.get(apiUrl, {
       params: {
@@ -23,10 +25,27 @@ app.get('/champions', (req, res) => {
       }
     })
     .then((response) => {
+      var data = {};
+
+      for(key in response.data.data) {
+        var item = response.data.data[key];
+
+        data[key] = {
+          key: key,
+          tags: item.tags,
+          lore: item.lore,
+          info: item.info,
+          name: item.name,
+          title: item.title,
+          image: item.image,
+          skins: item.skins
+        }
+      }
+
       res.setHeader('Content-Type', 'application/json');
-      res.send((response.data.data));
+      res.status(200).json({ payload: data });
     })
-    .catch(function (error) {
+    .catch(function (error) {      
       res.send({
         status: 400,
         error: "Unexpected error occurred."
