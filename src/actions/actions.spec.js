@@ -31,5 +31,14 @@ describe('Actions', () => {
              expect(actionReceived.data).toEqual(payload)
            })
     })
+
+    it('creates FETCH_FAILURE when cannot retrieve champions', () => {
+      const actions$ = ActionsObservable.of(actions.fetchChampions())
+
+      return actions.fetchChampionsEpic(actions$).toPromise()
+           .then((actionReceived) => {
+             expect(actionReceived.type).toBe(types.FETCH_FAILURE)             
+           })
+    })
   })
 })
