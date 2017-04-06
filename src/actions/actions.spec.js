@@ -21,12 +21,12 @@ describe('Actions', () => {
 
       nock(window.location.origin)
         .get('/champions')
-        .reply(200, { payload })
+        .reply(200, { payload: payload })
 
       const actions$ = ActionsObservable.of(actions.fetchChampions())
 
       return actions.fetchChampionsEpic(actions$).toPromise()
-           .then((actionReceived) => {
+           .then((actionReceived) => {             
              expect(actionReceived.type).toBe(types.FETCH_SUCCESS)
              expect(actionReceived.data).toEqual(payload)
            })
@@ -37,7 +37,7 @@ describe('Actions', () => {
 
       return actions.fetchChampionsEpic(actions$).toPromise()
            .then((actionReceived) => {
-             expect(actionReceived.type).toBe(types.FETCH_FAILURE)             
+             expect(actionReceived.type).toBe(types.FETCH_FAILURE)
            })
     })
   })
