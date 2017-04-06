@@ -13,9 +13,9 @@ export const fetchChampionsEpic = (action$) =>
     .mergeMap(action =>
       Api.fetchChampions()
         .map((xhr) => fetchSuccess(xhr.response.payload))
-        .catch((error) => Observable.of(fetchError(error)))
+        .catch((error) => Observable.of(fetchFailure(error)))
     )
 
 export const fetchSuccess = (data = {}) => ({ type: types.FETCH_SUCCESS, data })
 export const fetchChampions = () => ({ type: types.FETCH_CHAMPIONS });
-export const fetchError = (error) => ({ type: types.FETCH_FAILURE, error })
+export const fetchFailure = (error) => ({ type: types.FETCH_FAILURE, error })
