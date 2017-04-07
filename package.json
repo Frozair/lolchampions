@@ -9,9 +9,13 @@
     "morgan": "^1.8.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-redux": "^5.0.3",
+    "react-router-dom": "^4.0.0-beta.8",
     "redux": "^3.6.0",
+    "redux-logger": "^3.0.1",
     "redux-observable": "^0.14.1",
-    "rxjs": "^5.2.1-smooth"
+    "rxjs": "^5.2.1-smooth",
+    "styled-components": "^1.4.4"
   },
   "devDependencies": {
     "flow-bin": "^0.42.0",
