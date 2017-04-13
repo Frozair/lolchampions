@@ -14,7 +14,7 @@ const loadData = ({fetchChampions}) => {
   fetchChampions()
 }
 
-class ChampionList extends React.Component {
+class ChampionsList extends React.Component {
   componentWillMount() {
     loadData(this.props)
   }
@@ -36,8 +36,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-const ChampionListContainer = connect(mapStateToProps, {
+export default connect(mapStateToProps, {
   fetchChampions
-})(ChampionList)
-
-export default ChampionListContainer
+})(ChampionsList)
