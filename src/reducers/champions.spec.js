@@ -34,7 +34,7 @@ describe('Champions Reducer', () => {
     expect(nextState).toEqual(fromJS({
       loading: false,
       fetching: false,
-      champions: data
+      entries: data
     }))
   })
 

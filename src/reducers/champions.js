@@ -11,9 +11,9 @@ function setFetching(state) {
   return state.set('fetching', true).set('loading', true)
 }
 
-function setSuccess(state, champions) {
+function setSuccess(state, entries) {
   return state
-          .set('champions', fromJS(champions))
+          .set('entries', fromJS(entries))
           .set('fetching', false)
           .set('loading', false)
 }

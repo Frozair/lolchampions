@@ -3,7 +3,7 @@ import { createLogger } from 'redux-logger'
 import { createEpicMiddleware } from 'redux-observable'
 
 import { fetchChampionsEpic } from '../actions/actions'
-import reducer from '../reducers/index'
+import reducer from '../reducers'
 
 const middleware = []
 
