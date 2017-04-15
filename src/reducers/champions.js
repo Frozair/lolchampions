@@ -7,6 +7,21 @@ import {
   FETCH_FAILURE
 } from '../actions/types'
 
+function setFetching(state) {
+  return state.set('fetching', true).set('loading', true)
+}
+
+function setSuccess(state, entries) {
+  return state
+          .set('entries', fromJS(entries))
+          .set('fetching', false)
+          .set('loading', false)
+}
+
+function setError(state, error) {
+  return state.clear().set('error', true).set('errorMessage', error)
+}
+
 export default function champions(state = INITIAL_STATE, action = {}) {
   switch(action.type) {
     case FETCH_CHAMPIONS:
@@ -18,19 +33,4 @@ export default function champions(state = INITIAL_STATE, action = {}) {
     default:
       return state
   }
-}
-
-function setFetching(state) {
-  return state.set('fetching', true).set('loading', true)
-}
-
-function setSuccess(state, champions) {
-  return state
-          .set('champions', fromJS(champions))
-          .set('fetching', false)
-          .set('loading', false)
-}
-
-function setError(state, error) {
-  return state.clear().set('error', true).set('errorMessage', error)
 }
