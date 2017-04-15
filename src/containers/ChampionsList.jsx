@@ -3,9 +3,9 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 
 import { fetchChampions } from '../actions/actions'
+import ChampionPreview from '../components/ChampionPreview/ChampionPreview'
 
 const Wrapper = styled.section`
-  background: red;
   width: 150px;
   height: 150px;
 `
@@ -19,20 +19,25 @@ class ChampionsList extends React.Component {
     loadData(this.props)
   }
 
+  buildChampions() {
+    return this.props.champions.map((champion) => {
+      return <ChampionPreview champion={champion} />
+    })
+  }
+
   render() {
     console.log(this.props)
     return (
       <Wrapper>
-        <h1>Hello World</h1>
+        { this.props.champions != null ? this.buildChampions() : ''}
       </Wrapper>
     )
   }
 }
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return {
-    champions: null
+    champions: state.champions.get('entries')
   }
 }
 
