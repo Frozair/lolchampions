@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import ChampionsList from './containers/ChampionsList'
 
 const Content = styled.section`
-  padding: 100px 10% 150px 15%;
+  padding: 100px 10% 150px 10%;
 `
 
 const Routes = (props) => (

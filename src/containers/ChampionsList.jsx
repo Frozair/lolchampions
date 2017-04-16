@@ -6,8 +6,9 @@ import { fetchChampions } from '../actions/actions'
 import ChampionPreview from '../components/ChampionPreview/ChampionPreview'
 
 const Wrapper = styled.section`
-  width: 150px;
-  height: 150px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 `
 
 const loadData = ({fetchChampions}) => {
@@ -25,8 +26,7 @@ class ChampionsList extends React.Component {
     })
   }
 
-  render() {
-    console.log(this.props)
+  render() {    
     return (
       <Wrapper>
         { this.props.champions != null ? this.buildChampions() : ''}
