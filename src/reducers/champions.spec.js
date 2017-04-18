@@ -47,4 +47,23 @@ describe('Champions Reducer', () => {
       errorMessage
     }))
   })
+
+  it('should handle Get_CHAMPION', () => {
+    const state = fromJS({
+      entries: {
+        "Jax": {"id":24,"key":"Jax","name":"Jax","title":"Grandmaster at Arms"},
+        "Ahri": {"id":32,"key":"Ahri","name":"Ahri","title":"Ninetails Fox"}
+      }
+    })
+
+    const nextState = champions(state, actions.getChampion('Ahri'))
+
+    expect(nextState).toEqual(fromJS({
+      entries: {
+        "Jax": {"id":24,"key":"Jax","name":"Jax","title":"Grandmaster at Arms"},
+        "Ahri": {"id":32,"key":"Ahri","name":"Ahri","title":"Ninetails Fox"}
+      },
+      viewing_champion: {"id":32,"key":"Ahri","name":"Ahri","title":"Ninetails Fox"}
+    }))
+  })
 })

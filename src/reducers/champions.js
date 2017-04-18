@@ -4,7 +4,8 @@ import { INITIAL_STATE } from '../constants/index'
 import {
   FETCH_CHAMPIONS,
   FETCH_SUCCESS,
-  FETCH_FAILURE
+  FETCH_FAILURE,
+  GET_CHAMPION
 } from '../actions/types'
 
 function setFetching(state) {
@@ -22,6 +23,10 @@ function setError(state, error) {
   return state.clear().set('error', true).set('errorMessage', error)
 }
 
+function getChampion(state, name) {
+  return state.set('viewing_champion', state.get('entries').get(name))
+}
+
 export default function champions(state = INITIAL_STATE, action = {}) {
   switch(action.type) {
     case FETCH_CHAMPIONS:
@@ -30,6 +35,8 @@ export default function champions(state = INITIAL_STATE, action = {}) {
       return setSuccess(state, action.data)
     case FETCH_FAILURE:
       return setError(state, action.error)
+    case GET_CHAMPION:
+      return getChampion(state, action.name)
     default:
       return state
   }

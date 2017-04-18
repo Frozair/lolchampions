@@ -41,4 +41,13 @@ describe('Actions', () => {
            })
     })
   })
+
+  describe('GET_CHAMPION', () => {
+    it('creates GET_CHAMPION action', () => {
+      expect(actions.getChampion('Ahri')).toEqual({
+        type: types.GET_CHAMPION,
+        name: 'Ahri'
+      })
+    })
+  })
 })
