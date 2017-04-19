@@ -16,7 +16,7 @@ const Routes = (props) => (
 
       <Content className="content">
         <Route exact path="/" component={ChampionsList} />
-        <Route exact path="/champions/:name" component={ChampionDetails}/>
+        <Route exact path="/champions/:id" component={ChampionDetails}/>
         {/* <Route path="*" component={InvalidPage}/> */}
       </Content>
 
