@@ -25,10 +25,12 @@ app.get('/champions', (req, res) => {
       }
     })
     .then((response) => {
-      var data = {};
+      var data = {},
+      keys = response.data.keys,
+      champions = response.data.data
 
-      for(key in response.data.data) {
-        var item = response.data.data[key];
+      for(key in keys) {
+        var item = champions[keys[key]];
 
         data[key] = {
           key: key,
