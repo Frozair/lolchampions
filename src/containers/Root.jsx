@@ -11,7 +11,7 @@ const Wrapper = styled.section`
   position: fixed;
   overflow-x: hidden;
   overflow-y: scroll;
-  color: white;
+  color: papayawhip;
   font-family: "Gill Sans W04", GillSans, "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 `
 

@@ -14,6 +14,9 @@ const Name = styled.span`
   position: absolute;
   bottom: 0;
   left: 5%;
+  width: 100%;
+  opacity: 0.7;
+  background: black;
 `
 
 const StyledLink = styled(Link)`
