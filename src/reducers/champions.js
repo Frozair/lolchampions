@@ -23,8 +23,8 @@ function setError(state, error) {
   return state.clear().set('error', true).set('errorMessage', error)
 }
 
-function getChampion(state, name) {
-  return state.set('viewing_champion', state.get('entries').get(name))
+function getChampion(state, key) {
+  return state.set('viewing_champion', state.get('entries').get(key))
 }
 
 export default function champions(state = INITIAL_STATE, action = {}) {
@@ -36,7 +36,7 @@ export default function champions(state = INITIAL_STATE, action = {}) {
     case FETCH_FAILURE:
       return setError(state, action.error)
     case GET_CHAMPION:
-      return getChampion(state, action.name)
+      return getChampion(state, action.key)
     default:
       return state
   }

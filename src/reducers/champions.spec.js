@@ -25,8 +25,8 @@ describe('Champions Reducer', () => {
 
   it('should handle FETCH_SUCCESS', () => {
     const data = {
-      "Jax": {"id":24,"key":"Jax","name":"Jax","title":"Grandmaster at Arms"},
-      "Ahri": {"id":32,"key":"Ahri","name":"Ahri","title":"Ninetails Fox"}
+      "24": {"key":24,"name":"Jax","title":"Grandmaster at Arms"},
+      "32": {"key":32,"name":"Ahri","title":"Ninetails Fox"}
     }
 
     const nextState = champions(INITIAL_STATE, actions.fetchSuccess(data))
@@ -48,22 +48,22 @@ describe('Champions Reducer', () => {
     }))
   })
 
-  it('should handle Get_CHAMPION', () => {
+  it('should handle GET_CHAMPION', () => {
     const state = fromJS({
       entries: {
-        "Jax": {"id":24,"key":"Jax","name":"Jax","title":"Grandmaster at Arms"},
-        "Ahri": {"id":32,"key":"Ahri","name":"Ahri","title":"Ninetails Fox"}
+        "24": {"key":24,"name":"Jax","title":"Grandmaster at Arms"},
+        "32": {"key":32,"name":"Ahri","title":"Ninetails Fox"}
       }
     })
 
-    const nextState = champions(state, actions.getChampion('Ahri'))
+    const nextState = champions(state, actions.getChampion("24"))
 
     expect(nextState).toEqual(fromJS({
       entries: {
-        "Jax": {"id":24,"key":"Jax","name":"Jax","title":"Grandmaster at Arms"},
-        "Ahri": {"id":32,"key":"Ahri","name":"Ahri","title":"Ninetails Fox"}
+        "24": {"key":24,"name":"Jax","title":"Grandmaster at Arms"},
+        "32": {"key":32,"name":"Ahri","title":"Ninetails Fox"}
       },
-      viewing_champion: {"id":32,"key":"Ahri","name":"Ahri","title":"Ninetails Fox"}
+      viewing_champion: {"key":24,"name":"Jax","title":"Grandmaster at Arms"}
     }))
   })
 })
