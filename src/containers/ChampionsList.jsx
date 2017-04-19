@@ -11,8 +11,10 @@ const Wrapper = styled.section`
   justify-content: center;
 `
 
-const loadData = ({fetchChampions}) => {
-  fetchChampions()
+const loadData = ({fetchChampions, champions}) => {
+  if (champions === undefined) {
+    fetchChampions()
+  }
 }
 
 class ChampionsList extends React.Component {
