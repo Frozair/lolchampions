@@ -2,6 +2,8 @@ import React from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import styled from 'styled-components'
 
+import Header from './layouts/Header'
+import Footer from './layouts/Footer'
 import ChampionsList from './containers/ChampionsList'
 import ChampionDetails from './containers/ChampionDetails'
 
@@ -12,7 +14,7 @@ const Content = styled.section`
 const Routes = (props) => (
   <Router {...props}>
     <div className="page">
-      <div className="header"></div>
+      <Header />
 
       <Content className="content">
         <Route exact path="/" component={ChampionsList} />
@@ -20,7 +22,7 @@ const Routes = (props) => (
         {/* <Route path="*" component={InvalidPage}/> */}
       </Content>
 
-      <div className="footer"></div>
+      <Footer />
     </div>
   </Router>
 )

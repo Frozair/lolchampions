@@ -12,6 +12,7 @@ const Wrapper = styled.section`
   overflow-x: hidden;
   overflow-y: scroll;
   color: white;
+  font-family: "Gill Sans W04", GillSans, "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 `
 
 const Root = ({ store, history }) => (
