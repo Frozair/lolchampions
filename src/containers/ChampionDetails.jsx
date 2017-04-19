@@ -12,24 +12,22 @@ const Wrapper = styled.section`
   color: white;
 `
 
-const loadData = ({getChampion, match}) => {
-  getChampion(match.params.name)
+const loadData = ({getChampion, match}) => {  
+  getChampion(match.params.id)
 }
 
 class ChampionDetails extends React.Component {
   componentWillMount() {
-    console.log(this.props)
     loadData(this.props)
   }
 
   getRandomSkin() {
     const champion = this.props.champion
     const skins = champion.get('skins')
-    const randomNumber = Math.floor(Math.random() * skins.size) + 1
+    const randomNumber = Math.floor(Math.random() * skins.size)
+    const imageName = champion.get('image').get('full').replace('.png', '')
 
-    console.log(skins.get(randomNumber))
-
-    return SPLASH_IMAGE_URL + '/' + champion.get('name') + '_' + skins.get(randomNumber).get('num') + '.jpg'
+    return SPLASH_IMAGE_URL + '/' + imageName + '_' + skins.get(randomNumber).get('num') + '.jpg'
   }
 
   buildChampion() {
@@ -56,7 +54,6 @@ class ChampionDetails extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state.champions)
   return {
     champion: state.champions.get('viewing_champion')
   }
