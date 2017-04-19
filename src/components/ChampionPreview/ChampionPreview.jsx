@@ -36,7 +36,7 @@ export default class ChampionPreview extends React.Component {
 
   render() {
     return (
-      <Preview>
+      <Preview className="animated bounce">
         <StyledLink to={this.getChampLink()} className="champion-link">
           <img className="champion-img" src={this.getChampImg()} alt={this.getChampName()}/>
           <Name>{this.getChampName()}</Name>

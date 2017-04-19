@@ -8,7 +8,7 @@ import ChampionsList from './containers/ChampionsList'
 import ChampionDetails from './containers/ChampionDetails'
 
 const Content = styled.section`
-  padding: 100px 10% 150px 10%;
+  padding: 0px 10% 150px 10%;
 `
 
 const Routes = (props) => (

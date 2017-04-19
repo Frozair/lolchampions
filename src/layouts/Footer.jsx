@@ -7,7 +7,7 @@ const FooterContainer = styled.section`
   margin: 0
   color: #333132;
   background: #e9eaec;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   box-shadow: inset 0 0 10px #000000;
   padding: 10px;
