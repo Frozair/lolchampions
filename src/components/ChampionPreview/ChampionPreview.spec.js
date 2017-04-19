@@ -23,13 +23,14 @@ describe('ChampionPreview', () => {
 
     it('renders a link to the detail page', () => {
       const champion = fromJS({
+        key: 12,
         name: 'Ahri',
         image: {
           full: 'Ahri.png'
         }
       })
 
-      const expectedUrl = '/champions/' + champion.get('name')
+      const expectedUrl = '/champions/' + champion.get('key')
       const championPreview = shallow(<ChampionPreview champion={champion}/>)
 
       expect(championPreview.find('.champion-link').prop('to')).toEqual(expectedUrl)

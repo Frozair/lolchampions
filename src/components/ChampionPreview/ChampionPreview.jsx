@@ -31,7 +31,7 @@ export default class ChampionPreview extends React.Component {
   }
 
   getChampLink() {
-    return '/champions/' + this.getChampName()
+    return '/champions/' + this.props.champion.get('key')
   }
 
   render() {
@@ -39,7 +39,7 @@ export default class ChampionPreview extends React.Component {
       <Preview>
         <StyledLink to={this.getChampLink()} className="champion-link">
           <img className="champion-img" src={this.getChampImg()} alt={this.getChampName()}/>
-          <Name>{this.props.champion.get('name')}</Name>
+          <Name>{this.getChampName()}</Name>
         </StyledLink>
       </Preview>
     )
