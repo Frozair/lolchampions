@@ -66,4 +66,21 @@ describe('Champions Reducer', () => {
       viewing_champion: {"key":24,"name":"Jax","title":"Grandmaster at Arms"}
     }))
   })
+
+  it('should handle FILTER_CHAMPIONS', () => {
+    const state = fromJS({
+      entries: {
+        "24": {"key":24,"name":"Jax","title":"Grandmaster at Arms", tags: [ 'Tank', 'Fighter' ]},
+        "32": {"key":32,"name":"Ahri","title":"Ninetails Fox", tags: [ 'Mage' ]}
+      }
+    })
+
+    const nextState = champions(state, actions.filterChampions("Mage"))
+
+    expect(nextState).toEqual(fromJS({
+      entries: {
+        "32": {"key":32,"name":"Ahri","title":"Ninetails Fox", tags: [ 'Mage' ]}
+      }
+    }))
+  })
 })
