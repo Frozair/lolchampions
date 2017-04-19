@@ -26,7 +26,7 @@ describe('Actions', () => {
       const actions$ = ActionsObservable.of(actions.fetchChampions())
 
       return actions.fetchChampionsEpic(actions$).toPromise()
-           .then((actionReceived) => {             
+           .then((actionReceived) => {
              expect(actionReceived.type).toBe(types.FETCH_SUCCESS)
              expect(actionReceived.data).toEqual(payload)
            })
@@ -44,9 +44,9 @@ describe('Actions', () => {
 
   describe('GET_CHAMPION', () => {
     it('creates GET_CHAMPION action', () => {
-      expect(actions.getChampion('Ahri')).toEqual({
+      expect(actions.getChampion(123)).toEqual({
         type: types.GET_CHAMPION,
-        name: 'Ahri'
+        key: 123
       })
     })
   })
