@@ -75,7 +75,7 @@ describe('Champions Reducer', () => {
       }
     })
 
-    const nextState = champions(state, actions.filterChampions("Mage"))
+    const nextState = champions(state, actions.filterChampions(['Mage']))
 
     expect(nextState).toEqual(fromJS({
       entries: {
@@ -85,7 +85,7 @@ describe('Champions Reducer', () => {
       filtered_entries: {
         "32": {"key":32,"name":"Ahri","title":"Ninetails Fox", tags: [ 'Mage' ]}
       },
-      has_filtered: true
+      filtered_keys: ['Mage']
     }))
   })
 })
