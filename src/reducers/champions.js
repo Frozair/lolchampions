@@ -29,13 +29,15 @@ function getChampion(state, key) {
 }
 
 function filter(state, filterBy) {
-  console.log(state.get('entries'))
-  return state.get('entries').filter((item) => {
-    return item.get('tags').filter((tag) => {
-      console.log(tag===filterBy)
-       return tag === filterBy
-    })
+  let filteredEntries = state.get('entries').filter((item) => {
+    return item.get('tags').includes(filterBy)
   })
+
+  let hasFiltered = filteredEntries.size > 0
+
+  return state
+          .set('filtered_entries', filteredEntries)
+          .set('has_filtered', hasFiltered)            
 }
 
 export default function champions(state = INITIAL_STATE, action = {}) {

@@ -79,8 +79,13 @@ describe('Champions Reducer', () => {
 
     expect(nextState).toEqual(fromJS({
       entries: {
+        "24": {"key":24,"name":"Jax","title":"Grandmaster at Arms", tags: [ 'Tank', 'Fighter' ]},
         "32": {"key":32,"name":"Ahri","title":"Ninetails Fox", tags: [ 'Mage' ]}
-      }
+      },
+      filtered_entries: {
+        "32": {"key":32,"name":"Ahri","title":"Ninetails Fox", tags: [ 'Mage' ]}
+      },
+      has_filtered: true
     }))
   })
 })
