@@ -6,7 +6,8 @@ import PropTypes from 'prop-types'
 import { filterChampions } from '../../actions/actions'
 
 const Wrapper = styled.section`
-  justify-content: center;
+  margin:5px;
+  color: chocolate;
 `
 
 class FilterCheckBox extends React.Component {

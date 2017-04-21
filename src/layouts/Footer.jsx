@@ -8,12 +8,14 @@ const FooterContainer = styled.section`
   width: 100%;
   margin: 0
   color: #333132;
-  background: #e9eaec;
+  ${''/* background: #e9eaec; */}
+  background: papayawhip;
   position: fixed;
   bottom: 0;
   box-shadow: inset 0 0 10px #000000;
   padding: 10px;
   display: flex;
+  justify-content: center;
 `
 
 const FilteringContainer = styled.div`
