@@ -29,9 +29,15 @@ function getChampion(state, key) {
 }
 
 function filter(state, filterKeys) {
+  if (filterKeys.length == 0) {
+    return state
+      .delete('filtered_entries')
+      .delete('filtered_keys')
+  }
+
   let entries = state.get('entries')
 
-  if (state.get('filtered_entries') !== undefined || filterKeys.length == 0) {
+  if (state.get('filtered_entries') !== undefined && filterKeys.length > state.get('filtered_keys').size) {
     entries = state.get('filtered_entries')
   }
 
@@ -44,8 +50,8 @@ function filter(state, filterKeys) {
   })
 
   return state
+          .set('filtered_keys', fromJS(filterKeys))
           .set('filtered_entries', filteredEntries)
-          .set('filtered_keys', filterKeys)
 }
 
 export default function champions(state = INITIAL_STATE, action = {}) {

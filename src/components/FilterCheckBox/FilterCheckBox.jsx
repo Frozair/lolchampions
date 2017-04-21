@@ -15,15 +15,21 @@ class FilterCheckBox extends React.Component {
   }
 
   filter() {
-    // TODO - handle check/uncheck
     let keys = this.props.filtered_keys
-
-console.log('keys: ' + keys)
     if (keys === undefined) {
       keys = []
     }
 
-    keys.push(this.props.value)
+    if (event.target.checked) {
+      keys.push(event.target.value)
+    } else {
+      const index = keys.indexOf(event.target.value);
+
+      if (index > -1) {
+        keys.splice(index, 1);
+      }
+    }
+
     this.props.filterChampions(keys)
   }
 
@@ -31,7 +37,7 @@ console.log('keys: ' + keys)
     return (
       <Wrapper>
         <input value={this.props.value} type="checkbox" onClick={this.filter} />
-        {this.props.label}
+        <span>{this.props.label}</span>
       </Wrapper>
     )
   }
@@ -43,7 +49,6 @@ FilterCheckBox.propTypes = {
 }
 
 const mapStateToProps = (state) => {
-  console.log('filtered keys updated: ' + state.champions.get('flitered_keys'))
   return {
     filtered_keys: state.champions.get('filtered_keys')
   }
