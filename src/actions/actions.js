@@ -12,6 +12,7 @@ export const fetchSuccess = (data = {}) => ({ type: types.FETCH_SUCCESS, data })
 export const fetchChampions = () => ({ type: types.FETCH_CHAMPIONS })
 export const fetchFailure = (error) => ({ type: types.FETCH_FAILURE, error })
 export const getChampion = (key) => ({ type: types.GET_CHAMPION, key })
+export const filterChampions = (filterKeys) => ({ type: types.FILTER_CHAMPIONS, filterKeys})
 
 export const fetchChampionsEpic = (action$) => {
   return action$.ofType(types.FETCH_CHAMPIONS)

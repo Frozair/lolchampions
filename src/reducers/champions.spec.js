@@ -1,4 +1,4 @@
-import { fromJS } from 'immutable'
+import { fromJS, List } from 'immutable'
 import nock from 'nock'
 
 import { INITIAL_STATE } from '../constants/index'
@@ -64,6 +64,28 @@ describe('Champions Reducer', () => {
         "32": {"key":32,"name":"Ahri","title":"Ninetails Fox"}
       },
       viewing_champion: {"key":24,"name":"Jax","title":"Grandmaster at Arms"}
+    }))
+  })
+
+  it('should handle FILTER_CHAMPIONS', () => {
+    const state = fromJS({
+      entries: {
+        "24": {"key":24,"name":"Jax","title":"Grandmaster at Arms", tags: [ 'Tank', 'Fighter' ]},
+        "32": {"key":32,"name":"Ahri","title":"Ninetails Fox", tags: [ 'Mage' ]}
+      }
+    })
+
+    const nextState = champions(state, actions.filterChampions(['Mage']))
+
+    expect(nextState).toEqual(fromJS({
+      entries: {
+        "24": {"key":24,"name":"Jax","title":"Grandmaster at Arms", tags: [ 'Tank', 'Fighter' ]},
+        "32": {"key":32,"name":"Ahri","title":"Ninetails Fox", tags: [ 'Mage' ]}
+      },
+      filtered_keys: ['Mage'],
+      filtered_entries: {
+        "32": {"key":32,"name":"Ahri","title":"Ninetails Fox", tags: [ 'Mage' ]}
+      }
     }))
   })
 })

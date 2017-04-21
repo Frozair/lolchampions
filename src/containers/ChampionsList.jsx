@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 
-import { fetchChampions } from '../actions/actions'
+import { fetchChampions, filterChampions } from '../actions/actions'
 import ChampionPreview from '../components/ChampionPreview/ChampionPreview'
 
 const Wrapper = styled.section`
@@ -23,6 +23,10 @@ class ChampionsList extends React.Component {
   }
 
   buildChampions() {
+    if (this.props.champions.size == 0) {
+      return <h2>No champions for those filters</h2>
+    }
+
     return this.props.champions.map((champion) => {
       return <ChampionPreview champion={champion} />
     })
@@ -38,11 +42,17 @@ class ChampionsList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+  let champs = (
+    state.champions.get('filtered_keys') ?
+    state.champions.get('filtered_entries') :
+    state.champions.get('entries')
+  )
   return {
-    champions: state.champions.get('entries')
+    champions: champs
   }
 }
 
 export default connect(mapStateToProps, {
-  fetchChampions
+  fetchChampions,
+  filterChampions
 })(ChampionsList)

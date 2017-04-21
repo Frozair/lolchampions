@@ -5,7 +5,8 @@ import {
   FETCH_CHAMPIONS,
   FETCH_SUCCESS,
   FETCH_FAILURE,
-  GET_CHAMPION
+  GET_CHAMPION,
+  FILTER_CHAMPIONS
 } from '../actions/types'
 
 function setFetching(state) {
@@ -27,6 +28,32 @@ function getChampion(state, key) {
   return state.set('viewing_champion', state.get('entries').get(key))
 }
 
+function filter(state, filterKeys) {
+  if (filterKeys.length == 0) {
+    return state
+      .delete('filtered_entries')
+      .delete('filtered_keys')
+  }
+
+  let entries = state.get('entries')
+
+  if (state.get('filtered_entries') !== undefined && filterKeys.length > state.get('filtered_keys').size) {
+    entries = state.get('filtered_entries')
+  }
+
+  let filteredEntries = entries.filter((item) => {
+    let pass = true
+    for (let i = 0; i < filterKeys.length; i++) {
+        pass = pass && item.get('tags').includes(filterKeys[i])
+    }
+    return pass
+  })
+
+  return state
+          .set('filtered_keys', fromJS(filterKeys))
+          .set('filtered_entries', filteredEntries)
+}
+
 export default function champions(state = INITIAL_STATE, action = {}) {
   switch(action.type) {
     case FETCH_CHAMPIONS:
@@ -37,6 +64,8 @@ export default function champions(state = INITIAL_STATE, action = {}) {
       return setError(state, action.error)
     case GET_CHAMPION:
       return getChampion(state, action.key)
+    case FILTER_CHAMPIONS:
+      return filter(state, action.filterKeys)
     default:
       return state
   }
