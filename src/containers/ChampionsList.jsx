@@ -23,7 +23,7 @@ class ChampionsList extends React.Component {
   }
 
   buildChampions() {
-    if (this.props.champions.size == 0) {
+    if (this.props.champions.size === 0) {
       return <h2>No champions for those filters</h2>
     }
 
