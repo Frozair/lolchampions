@@ -67,7 +67,7 @@ describe('Champions Reducer', () => {
     }))
   })
 
-  it('should handle FILTER_CHAMPIONS', () => {
+  it('should handle FILTER_CHAMPIONS_BY', () => {
     const state = fromJS({
       entries: {
         "24": {"key":24,"name":"Jax","title":"Grandmaster at Arms", tags: [ 'Tank', 'Fighter' ]},
@@ -85,6 +85,42 @@ describe('Champions Reducer', () => {
       filtered_keys: ['Mage'],
       filtered_entries: {
         "32": {"key":32,"name":"Ahri","title":"Ninetails Fox", tags: [ 'Mage' ]}
+      }
+    }))
+  })
+
+  it('should handle RESET_FILTER_KEY', () => {
+    const state = fromJS({
+      entries: {
+        "24": {"key":24,"name":"Jax","title":"Grandmaster at Arms", tags: [ 'Assasin', 'Tank', 'Fighter' ]},
+        "32": {"key":32,"name":"Ahri","title":"Ninetails Fox", tags: [ 'Assasin', 'Mage' ]}
+      },
+      filtered_keys: ['Assasin', 'Tank'],
+      filtered_entries: {
+        "24": {"key":24,"name":"Jax","title":"Grandmaster at Arms", tags: [ 'Assasin', 'Tank', 'Fighter' ]}
+      }
+    })
+
+    let nextState = champions(state, actions.resetFilterKey('Tank'))
+
+    expect(nextState).toEqual(fromJS({
+      entries: {
+        "24": {"key":24,"name":"Jax","title":"Grandmaster at Arms", tags: [ 'Assasin', 'Tank', 'Fighter' ]},
+        "32": {"key":32,"name":"Ahri","title":"Ninetails Fox", tags: [ 'Assasin', 'Mage' ]}
+      },
+      filtered_keys: ['Assasin'],
+      filtered_entries: {
+        "24": {"key":24,"name":"Jax","title":"Grandmaster at Arms", tags: [ 'Assasin', 'Tank', 'Fighter' ]},
+        "32": {"key":32,"name":"Ahri","title":"Ninetails Fox", tags: [ 'Assasin', 'Mage' ]}
+      }
+    }))
+
+    nextState = champions(nextState, actions.resetFilterKey('Assasin'))
+
+    expect(nextState).toEqual(fromJS({
+      entries: {
+        "24": {"key":24,"name":"Jax","title":"Grandmaster at Arms", tags: [ 'Assasin', 'Tank', 'Fighter' ]},
+        "32": {"key":32,"name":"Ahri","title":"Ninetails Fox", tags: [ 'Assasin', 'Mage' ]}
       }
     }))
   })

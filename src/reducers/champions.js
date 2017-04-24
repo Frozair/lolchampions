@@ -1,14 +1,7 @@
-import { fromJS } from 'immutable'
+import { List, fromJS } from 'immutable'
 
 import { INITIAL_STATE } from '../constants/index'
-import {
-  FETCH_CHAMPIONS,
-  FETCH_SUCCESS,
-  FETCH_FAILURE,
-  GET_CHAMPION,
-  FILTER_CHAMPIONS,
-  FILTER_CHAMPIONS_BY
-} from '../actions/types'
+import * as ActionTypes from '../actions/types'
 
 function setFetching(state) {
   return state.set('fetching', true).set('loading', true)
@@ -29,51 +22,82 @@ function getChampion(state, key) {
   return state.set('viewing_champion', state.get('entries').get(key))
 }
 
+function filterEntries(entries, filteredKeys) {
+  return entries.filter((item) => {
+    let pass = true
+    for (let i = 0; i < filteredKeys.size; i++) {
+        pass = pass && item.get('tags').includes(filteredKeys.get(i))
+    }
+    return pass
+  })
+}
+
 function filter(state, filterKey) {
   let entries = state.get('entries')
 
   if (entries === undefined) {
     return state
-      .delete('filtered_entries')
-      .delete('filtered_keys')
   }
 
   if (state.get('filtered_entries') !== undefined) {
     entries = state.get('filtered_entries')
   }
 
-  let filteredKeys = []
+  let filteredKeys
   if (state.get('filtered_keys') !== undefined) {
     filteredKeys = state.get('filtered_keys')
+  } else {
+    filteredKeys = new List()
   }
 
-  filteredKeys.push(filterKey)
+  filteredKeys = filteredKeys.push(filterKey)
 
-  let filteredEntries = entries.filter((item) => {
-    let pass = true
-    for (let i = 0; i < filteredKeys.length; i++) {
-        pass = pass && item.get('tags').includes(filteredKeys[i])
-    }
-    return pass
-  })
+  let filteredEntries = filterEntries(entries, filteredKeys)
 
   return state
-          .set('filtered_keys', fromJS(filteredKeys))
+          .set('filtered_keys', filteredKeys)
+          .set('filtered_entries', filteredEntries)
+}
+
+function resetFilterKey(state, filterKey) {
+  let entries = state.get('entries')
+
+  if (entries === undefined || state.get('filtered_keys') === undefined) {
+    return state
+  }
+
+  let filteredKeys = state.get('filtered_keys')
+  let idx = filteredKeys.indexOf(filterKey)
+
+  filteredKeys = filteredKeys.delete(idx)
+
+  if (filteredKeys.size === 0) {
+    return state
+      .delete('filtered_keys')
+      .delete('filtered_entries')
+  }
+
+  let filteredEntries = filterEntries(entries, filteredKeys)
+
+  return state
+          .set('filtered_keys', filteredKeys)
           .set('filtered_entries', filteredEntries)
 }
 
 export default function champions(state = INITIAL_STATE, action = {}) {
   switch(action.type) {
-    case FETCH_CHAMPIONS:
+    case ActionTypes.FETCH_CHAMPIONS:
       return setFetching(state)
-    case FETCH_SUCCESS:
+    case ActionTypes.FETCH_SUCCESS:
       return setSuccess(state, action.data)
-    case FETCH_FAILURE:
+    case ActionTypes.FETCH_FAILURE:
       return setError(state, action.error)
-    case GET_CHAMPION:
+    case ActionTypes.GET_CHAMPION:
       return getChampion(state, action.key)
-    case FILTER_CHAMPIONS_BY:
+    case ActionTypes.FILTER_CHAMPIONS_BY:
       return filter(state, action.filterKey)
+    case ActionTypes.RESET_FILTER_KEY:
+      return resetFilterKey(state, action.filterKey)
     default:
       return state
   }
