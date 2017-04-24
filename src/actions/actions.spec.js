@@ -59,4 +59,13 @@ describe('Actions', () => {
       })
     })
   })
+
+  describe('RESET_FILTER_KEY', () => {
+    it('creates RESET_FILTER_KEY action', () => {
+      expect(actions.resetFilterKey('Mage')).toEqual({
+        type: types.RESET_FILTER_KEY,
+        filterKey: 'Mage'
+      })
+    })
+  })
 })
