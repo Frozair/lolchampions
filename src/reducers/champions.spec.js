@@ -75,7 +75,7 @@ describe('Champions Reducer', () => {
       }
     })
 
-    const nextState = champions(state, actions.filterChampions(['Mage']))
+    const nextState = champions(state, actions.filterChampionsBy('Mage'))
 
     expect(nextState).toEqual(fromJS({
       entries: {
