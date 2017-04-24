@@ -51,11 +51,11 @@ describe('Actions', () => {
     })
   })
 
-  describe('FILTER_CHAMPIONS', () => {
-    it('creates FILTER_CHAMPIONS action', () => {
-      expect(actions.filterChampions(['Mage'])).toEqual({
-        type: types.FILTER_CHAMPIONS,
-        filterKeys: ['Mage']
+  describe('FILTER_CHAMPIONS_BY', () => {
+    it('creates FILTER_CHAMPIONS_BY action', () => {
+      expect(actions.filterChampionsBy('Mage')).toEqual({
+        type: types.FILTER_CHAMPIONS_BY,
+        filterKey: 'Mage'
       })
     })
   })
