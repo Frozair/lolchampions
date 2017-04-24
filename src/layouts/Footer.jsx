@@ -1,7 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
 
 import FilterCheckBox from '../components/FilterCheckBox/FilterCheckBox'
+import { filterChampionsBy, resetFilterKey } from '../actions/actions'
 
 const FooterContainer = styled.section`
   height: 60px;
@@ -23,20 +25,43 @@ const FilteringContainer = styled.div`
   flex-wrap: wrap;
 `
 
-export default class Footer extends React.Component {
+class Footer extends React.Component {
+  componentWillMount() {
+    this.filter = this.filter.bind(this)
+  }
+
+  filter(event) {
+    const key = event.target.value
+    if (event.target.checked) {
+      this.props.filterChampionsBy(key)
+    } else {
+      this.props.resetFilterKey(key)
+    }
+  }
+
   render() {
     return (
       <FooterContainer>
-        <h1>This is a footer</h1>
         <FilteringContainer>
-          <FilterCheckBox value="Assassin" label="Assassin"/>
-          <FilterCheckBox value="Fighter" label="Fighter"/>
-          <FilterCheckBox value="Mage" label="Mage"/>
-          <FilterCheckBox value="Marksman" label="Marksman"/>
-          <FilterCheckBox value="Support" label="Support"/>
-          <FilterCheckBox value="Tank" label="Tank"/>
+          <FilterCheckBox value="Assassin" label="Assassin" filter={this.filter}/>
+          <FilterCheckBox value="Fighter" label="Fighter" filter={this.filter}/>
+          <FilterCheckBox value="Mage" label="Mage" filter={this.filter}/>
+          <FilterCheckBox value="Marksman" label="Marksman" filter={this.filter}/>
+          <FilterCheckBox value="Support" label="Support" filter={this.filter}/>
+          <FilterCheckBox value="Tank" label="Tank" filter={this.filter}/>
         </FilteringContainer>
       </FooterContainer>
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    filteredKeys: state.champions.get('filtered_keys')
+  }
+}
+
+export default connect(mapStateToProps, {
+  filterChampionsBy,
+  resetFilterKey
+})(Footer)
