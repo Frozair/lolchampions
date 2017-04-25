@@ -39,17 +39,27 @@ class Footer extends React.Component {
     }
   }
 
+  renderFilters() {
+    return (
+      <FilteringContainer>
+        <FilterCheckBox value="Assassin" label="Assassin" filter={this.filter}/>
+        <FilterCheckBox value="Fighter" label="Fighter" filter={this.filter}/>
+        <FilterCheckBox value="Mage" label="Mage" filter={this.filter}/>
+        <FilterCheckBox value="Marksman" label="Marksman" filter={this.filter}/>
+        <FilterCheckBox value="Support" label="Support" filter={this.filter}/>
+        <FilterCheckBox value="Tank" label="Tank" filter={this.filter}/>
+      </FilteringContainer>
+    )
+  }
+
+  viewingChampion() {
+    return this.props.viewingChampion !== undefined
+  }
+
   render() {
     return (
       <FooterContainer>
-        <FilteringContainer>
-          <FilterCheckBox value="Assassin" label="Assassin" filter={this.filter}/>
-          <FilterCheckBox value="Fighter" label="Fighter" filter={this.filter}/>
-          <FilterCheckBox value="Mage" label="Mage" filter={this.filter}/>
-          <FilterCheckBox value="Marksman" label="Marksman" filter={this.filter}/>
-          <FilterCheckBox value="Support" label="Support" filter={this.filter}/>
-          <FilterCheckBox value="Tank" label="Tank" filter={this.filter}/>
-        </FilteringContainer>
+        {this.renderFilters()}
       </FooterContainer>
     )
   }
@@ -57,7 +67,7 @@ class Footer extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    filteredKeys: state.champions.get('filtered_keys')
+    viewingChampion: state.champions.get('viewing_champion')
   }
 }
 
