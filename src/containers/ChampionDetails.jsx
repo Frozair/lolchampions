@@ -39,7 +39,7 @@ const Overlay = styled.div`
 `
 
 const ChampionName = styled.div`
-  font-weight: bold;
+  font-weight: bolder;
   font-size: 2em;
   margin: 0 0 5px 0;
 `
@@ -54,8 +54,13 @@ const loadData = ({getChampion, match}) => {
 
 class ChampionDetails extends React.Component {
   componentWillMount() {
-    this.props.champion = undefined
-    loadData(this.props)
+    // Only load data if it's a new champion
+    if (this.props.champion === undefined) {
+      loadData(this.props)
+    } else if (this.props.champion.get('key') !== this.props.match.params.id) {
+      this.props.champion = undefined
+      loadData(this.props)
+    }
   }
 
   getRandomSkin() {
