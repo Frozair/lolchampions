@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 import { connect } from 'react-redux'
 import Typist from 'react-typist'
 import renderHTML from 'react-render-html'
@@ -12,23 +12,22 @@ const Wrapper = styled.section`
   flex-wrap: wrap;
   justify-content: center;
   color: white;
+  font-family: fantasy;
 `
 
 const DetailsWrapper = styled.div`
   position: relative;
   overflow: hidden;
+  border: papayawhip 1px;
+  border-width: 1px;
+  border-style: solid;
 `
 
-const typing = keyframes`
-  from{ width: 0 }
-  to{ width: 100% }
-`
-
-const LoreOverlay = styled.div`
+const Overlay = styled.div`
   width: 30%;
   background-color: black;
   color: papayawhip;
-  height: 100%;
+  height: 99%;
   position: absolute;
   opacity: 0.7;
   display: inline-block;
@@ -36,6 +35,17 @@ const LoreOverlay = styled.div`
   padding: 5px 10px 0 5px;
   overflow-y: scroll;
   word-wrap: break-word;
+  text-align: center;
+`
+
+const ChampionName = styled.div`
+  font-weight: bold;
+  font-size: 2em;
+  margin: 0 0 5px 0;
+`
+
+const ChampionImg = styled.img`
+  display: block;
 `
 
 const loadData = ({getChampion, match}) => {
@@ -44,6 +54,7 @@ const loadData = ({getChampion, match}) => {
 
 class ChampionDetails extends React.Component {
   componentWillMount() {
+    this.props.champion = undefined
     loadData(this.props)
   }
 
@@ -61,21 +72,21 @@ class ChampionDetails extends React.Component {
   }
 
   buildChampion() {
+    console.log(this.props.champion)
     if (this.props.champion === undefined) {
       return ''
     }
 
-console.log(this.getLore())
     return (
       <div>
-        <h1>{this.props.champion.get('name')}</h1>
         <DetailsWrapper>
-          <LoreOverlay>
+          <Overlay>
+            <ChampionName>{this.props.champion.get('name')}</ChampionName>
             <Typist avgTypingDelay={40}>
               {renderHTML(this.getLore())}
             </Typist>
-          </LoreOverlay>
-          <img src={this.getRandomSkin()} alt="Champion Skin" />
+          </Overlay>
+          <ChampionImg src={this.getRandomSkin()} alt="Champion Skin" />
         </DetailsWrapper>
       </div>
     )
