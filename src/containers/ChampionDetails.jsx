@@ -8,11 +8,14 @@ import { getChampion } from '../actions/actions'
 import { SPLASH_IMAGE_URL } from '../constants'
 
 const Wrapper = styled.section`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
   color: white;
   font-family: fantasy;
+  display: flex;
+  justify-content: center;
+
+  @media (max-width: 1024px) {
+    display: inline;
+  }
 `
 
 const DetailsWrapper = styled.div`
@@ -36,6 +39,13 @@ const Overlay = styled.div`
   overflow-y: scroll;
   word-wrap: break-word;
   text-align: center;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+    z-index: 100;
+    opacity: 0.9;
+    background-color: transparent;
+  }
 `
 
 const ChampionName = styled.div`
@@ -46,6 +56,15 @@ const ChampionName = styled.div`
 
 const ChampionImg = styled.img`
   display: block;
+
+  @media (max-width: 1024px) {
+    position: relative;
+    left: -50%;
+  }
+
+  @media (max-width: 1020px) {
+    left: -175%;
+  }
 `
 
 const loadData = ({getChampion, match}) => {

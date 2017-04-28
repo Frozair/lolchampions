@@ -9,6 +9,11 @@ import ChampionDetails from './containers/ChampionDetails'
 
 const Content = styled.section`
   padding: 0px 10% 150px 10%;
+  
+  @media (max-width: 1024px) {
+    padding: 0;
+    margin-bottom: 80px;
+  }
 `
 
 const Routes = (props) => (

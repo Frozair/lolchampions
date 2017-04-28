@@ -18,6 +18,7 @@ const FooterContainer = styled.section`
   padding: 10px;
   display: flex;
   justify-content: center;
+  z-index: 200;
 `
 
 const FilteringContainer = styled.div`
