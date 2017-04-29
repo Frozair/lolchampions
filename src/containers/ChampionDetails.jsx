@@ -43,7 +43,6 @@ const Overlay = styled.div`
   @media (max-width: 1024px) {
     width: 100%;
     z-index: 100;
-    opacity: 0.6;
   }
 `
 
@@ -61,13 +60,14 @@ const ChampionImg = styled.img`
 `
 
 const LoreContainer = styled.div`
-  height: 55%;
+  height: 65%;
   overflow-y: scroll;
   border-bottom: 1px solid papayawhip;
   padding-top: 10px;
 `
 
 const InfoContainer = styled.div`
+  height: 35%;
   padding: 0 10px 0 10px;
 `
 
@@ -106,21 +106,21 @@ class ChampionDetails extends React.Component {
     }
 
     let info = this.props.champion.get('info')
-    
+
     return (
       <div>
         <DetailsWrapper>
           <ChampionName name={this.props.champion.get('name')} />
           <Overlay>
-            <LoreContainer>
-              <Lore html={this.getLore()} />
-            </LoreContainer>
             <InfoContainer>
               <InfoBar color="red" name="Attack" value={info.get('attack')} />
               <InfoBar color="green" name="Defense" value={info.get('defense')} />
               <InfoBar color="purple" name="Magic" value={info.get('magic')} />
               <InfoBar color="blue" name="Difficulty" value={info.get('difficulty')} />
             </InfoContainer>
+            <LoreContainer>
+              <Lore html={this.getLore()} />
+            </LoreContainer>
           </Overlay>
           <ChampionImg src={this.getRandomSkin()} alt="Champion Skin" className="animated zoomIn"/>
         </DetailsWrapper>

@@ -10,8 +10,7 @@ const FooterContainer = styled.section`
   width: 100%;
   margin: 0
   color: #333132;
-  ${''/* background: #e9eaec; */}
-  background: papayawhip;
+  background: #e9eaec;    
   position: fixed;
   bottom: 0;
   box-shadow: inset 0 0 10px #000000;
