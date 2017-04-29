@@ -6,6 +6,7 @@ import { getChampion } from '../actions/actions'
 import { SPLASH_IMAGE_URL } from '../constants'
 import ChampionName from '../components/ChampionName'
 import Lore from '../components/Lore'
+import InfoBar from '../components/InfoBar'
 
 const Wrapper = styled.section`
   color: white;
@@ -38,7 +39,6 @@ const Overlay = styled.div`
   word-wrap: break-word;
   text-align: center;
   z-index: 100;
-  padding-top: 10px;
 
   @media (max-width: 1024px) {
     width: 100%;
@@ -60,20 +60,15 @@ const ChampionImg = styled.img`
   }
 `
 
-const InfoBar = styled.div`
-  background: red;
-  width: 90%;
-  height: 30px;
-`
-
 const LoreContainer = styled.div`
   height: 55%;
   overflow-y: scroll;
   border-bottom: 1px solid papayawhip;
+  padding-top: 10px;
 `
 
 const InfoContainer = styled.div`
-
+  padding: 0 10px 0 10px;
 `
 
 const loadData = ({getChampion, match}) => {
@@ -110,6 +105,8 @@ class ChampionDetails extends React.Component {
       return ''
     }
 
+    let info = this.props.champion.get('info')
+    
     return (
       <div>
         <DetailsWrapper>
@@ -118,12 +115,12 @@ class ChampionDetails extends React.Component {
             <LoreContainer>
               <Lore html={this.getLore()} />
             </LoreContainer>
-            <div>
-              <InfoBar />
-              <InfoBar />
-              <InfoBar />
-              <InfoBar />
-            </div>
+            <InfoContainer>
+              <InfoBar color="red" name="Attack" value={info.get('attack')} />
+              <InfoBar color="green" name="Defense" value={info.get('defense')} />
+              <InfoBar color="purple" name="Magic" value={info.get('magic')} />
+              <InfoBar color="blue" name="Difficulty" value={info.get('difficulty')} />
+            </InfoContainer>
           </Overlay>
           <ChampionImg src={this.getRandomSkin()} alt="Champion Skin" className="animated zoomIn"/>
         </DetailsWrapper>
