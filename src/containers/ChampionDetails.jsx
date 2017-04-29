@@ -1,12 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
-import Typist from 'react-typist'
-import renderHTML from 'react-render-html'
 
 import { getChampion } from '../actions/actions'
 import { SPLASH_IMAGE_URL } from '../constants'
 import ChampionName from '../components/ChampionName'
+import Lore from '../components/Lore'
 
 const Wrapper = styled.section`
   color: white;
@@ -49,15 +48,6 @@ const Overlay = styled.div`
   }
 `
 
-const ChampionName = styled.div`
-  font-weight: bolder;
-  font-size: 2em;
-  font-weight: bolder;
-  text-align: center;
-  color: black;
-  background: papayawhip;
-`
-
 const ChampionImg = styled.img`
   display: block;
 
@@ -75,6 +65,11 @@ const InfoBar = styled.div`
   background: red;
   width: 10%;
   height: 10px;
+const LoreContainer = styled.div`
+  height: 55%;
+  overflow-y: scroll;
+  border-bottom: 1px solid papayawhip;
+`
 `
 
 const loadData = ({getChampion, match}) => {
@@ -114,12 +109,11 @@ class ChampionDetails extends React.Component {
     return (
       <div>
         <DetailsWrapper>
-          <ChampionName>{this.props.champion.get('name')}</ChampionName>
           <ChampionName name={this.props.champion.get('name')} />
           <Overlay>
-            <Typist avgTypingDelay={40}>
-              {renderHTML(this.getLore())}
-            </Typist>
+            <LoreContainer>
+              <Lore html={this.getLore()} />
+            </LoreContainer>
           </Overlay>
           <ChampionImg src={this.getRandomSkin()} alt="Champion Skin" className="animated zoomIn"/>
         </DetailsWrapper>
@@ -131,7 +125,6 @@ class ChampionDetails extends React.Component {
     return (
       <Wrapper>
         { this.buildChampion() }
-
       </Wrapper>
     )
   }
