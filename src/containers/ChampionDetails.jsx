@@ -30,16 +30,15 @@ const Overlay = styled.div`
   width: 30%;
   background-color: black;
   color: papayawhip;
-  height: 99%;
+  height: 100%;
   position: absolute;
   opacity: 0.7;
   display: inline-block;
   margin-left: 0px;
-  padding: 5px 10px 0 5px;
-  overflow-y: scroll;
   word-wrap: break-word;
   text-align: center;
   z-index: 100;
+  padding-top: 10px;
 
   @media (max-width: 1024px) {
     width: 100%;
@@ -63,13 +62,18 @@ const ChampionImg = styled.img`
 
 const InfoBar = styled.div`
   background: red;
-  width: 10%;
-  height: 10px;
+  width: 90%;
+  height: 30px;
+`
+
 const LoreContainer = styled.div`
   height: 55%;
   overflow-y: scroll;
   border-bottom: 1px solid papayawhip;
 `
+
+const InfoContainer = styled.div`
+
 `
 
 const loadData = ({getChampion, match}) => {
@@ -114,6 +118,12 @@ class ChampionDetails extends React.Component {
             <LoreContainer>
               <Lore html={this.getLore()} />
             </LoreContainer>
+            <div>
+              <InfoBar />
+              <InfoBar />
+              <InfoBar />
+              <InfoBar />
+            </div>
           </Overlay>
           <ChampionImg src={this.getRandomSkin()} alt="Champion Skin" className="animated zoomIn"/>
         </DetailsWrapper>
