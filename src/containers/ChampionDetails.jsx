@@ -6,6 +6,7 @@ import renderHTML from 'react-render-html'
 
 import { getChampion } from '../actions/actions'
 import { SPLASH_IMAGE_URL } from '../constants'
+import ChampionName from '../components/ChampionName'
 
 const Wrapper = styled.section`
   color: white;
@@ -114,6 +115,7 @@ class ChampionDetails extends React.Component {
       <div>
         <DetailsWrapper>
           <ChampionName>{this.props.champion.get('name')}</ChampionName>
+          <ChampionName name={this.props.champion.get('name')} />
           <Overlay>
             <Typist avgTypingDelay={40}>
               {renderHTML(this.getLore())}
