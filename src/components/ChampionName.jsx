@@ -9,6 +9,7 @@ const NameWrapper = styled.div`
   text-align: center;
   color: black;
   background: papayawhip;
+  padding-top: 8px;
 `
 
 const ChampionName = ({name}) => {
