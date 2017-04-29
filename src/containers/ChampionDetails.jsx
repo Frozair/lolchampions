@@ -39,19 +39,22 @@ const Overlay = styled.div`
   overflow-y: scroll;
   word-wrap: break-word;
   text-align: center;
+  z-index: 100;
 
   @media (max-width: 1024px) {
     width: 100%;
     z-index: 100;
-    opacity: 0.9;
-    background-color: transparent;
+    opacity: 0.6;
   }
 `
 
 const ChampionName = styled.div`
   font-weight: bolder;
   font-size: 2em;
-  margin: 0 0 5px 0;
+  font-weight: bolder;
+  text-align: center;
+  color: black;
+  background: papayawhip;
 `
 
 const ChampionImg = styled.img`
@@ -65,6 +68,12 @@ const ChampionImg = styled.img`
   @media (max-width: 1020px) {
     left: -175%;
   }
+`
+
+const InfoBar = styled.div`
+  background: red;
+  width: 10%;
+  height: 10px;
 `
 
 const loadData = ({getChampion, match}) => {
@@ -104,13 +113,13 @@ class ChampionDetails extends React.Component {
     return (
       <div>
         <DetailsWrapper>
+          <ChampionName>{this.props.champion.get('name')}</ChampionName>
           <Overlay>
-            <ChampionName>{this.props.champion.get('name')}</ChampionName>
             <Typist avgTypingDelay={40}>
               {renderHTML(this.getLore())}
             </Typist>
           </Overlay>
-          <ChampionImg src={this.getRandomSkin()} alt="Champion Skin" />
+          <ChampionImg src={this.getRandomSkin()} alt="Champion Skin" className="animated zoomIn"/>
         </DetailsWrapper>
       </div>
     )
