@@ -60,10 +60,10 @@ const ChampionImg = styled.img`
 `
 
 const LoreContainer = styled.div`
-  height: 65%;
+  height: 57%;
   overflow-y: scroll;
   border-bottom: 1px solid papayawhip;
-  padding-top: 10px;
+  padding: 10px 10px 0 10px;
 `
 
 const InfoContainer = styled.div`
