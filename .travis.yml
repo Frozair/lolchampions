@@ -9,3 +9,5 @@ deploy:
   app: championslol
   on:
     repo: newrdev/lolchampions
+after_deploy:
+  - npm run build
