@@ -15,9 +15,15 @@ const HeaderContainer = styled.section`
   }
 `
 
+const Title = styled.h1`
+  font-family: fantasy;
+  font-size: 3em;
+  margin: 7px 0 0 0;
+`
+
 const Header = () => (
   <HeaderContainer>
-    <h1>LoL Champions</h1>
+    <Title>LoL Champions</Title>
   </HeaderContainer>
 )
 
