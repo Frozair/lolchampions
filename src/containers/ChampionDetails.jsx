@@ -54,7 +54,7 @@ const ChampionImg = styled.img`
     left: -50%;
   }
 
-  @media (max-width: 1020px) {
+  @media (max-width: 767px) {
     left: -175%;
   }
 `

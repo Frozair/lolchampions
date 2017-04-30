@@ -10,7 +10,7 @@ const FooterContainer = styled.section`
   width: 100%;
   margin: 0
   color: #333132;
-  background: #e9eaec;    
+  background: papayawhip;
   position: fixed;
   bottom: 0;
   box-shadow: inset 0 0 10px #000000;
@@ -18,11 +18,16 @@ const FooterContainer = styled.section`
   display: flex;
   justify-content: center;
   z-index: 200;
+
+  @media (max-width: 767px) {
+    width: inherit;
+  }
 `
 
 const FilteringContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 `
 
 class Footer extends React.Component {

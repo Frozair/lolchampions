@@ -7,8 +7,8 @@ const NameWrapper = styled.div`
   font-size: 2em;
   font-weight: bolder;
   text-align: center;
-  color: black;
-  background: papayawhip;
+  color: chocolate;
+  background: #e9eaec;
   padding-top: 8px;
 `
 
