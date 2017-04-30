@@ -1,4 +1,4 @@
-# League of Legends - Champions
+# League of Legends - Champions [![Build Status](https://travis-ci.org/newrdev/lolchampions.svg?branch=master)](https://travis-ci.org/newrdev/lolchampions)
 
 Application to learn more about the League of Legends champions.
 
